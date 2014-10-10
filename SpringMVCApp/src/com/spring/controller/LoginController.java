@@ -13,7 +13,7 @@ public class LoginController {
 		if(id == 1l){
 			throw new RuntimeException();
 		}else{
-			model.addAttribute("message", "Hello World");
+			model.addAttribute("message", "Hello World!");
 		}
 		return "views/helloworld";
 	}

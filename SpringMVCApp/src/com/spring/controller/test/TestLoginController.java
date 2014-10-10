@@ -54,7 +54,7 @@ public class TestLoginController {
 	public void setUp(){
 		MockitoAnnotations.initMocks(this);
 		/**
-		 * 使用standaloneSetup来安装controller
+		 * 使用standaloneSetup来组装controller
 		 */
 		this.mockMvc = standaloneSetup(controller)
 							.setHandlerExceptionResolvers(exceptionResolvers())
