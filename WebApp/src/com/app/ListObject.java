@@ -15,7 +15,7 @@ public class ListObject implements Serializable
 {
 
     /**
-     * Stable serialVersionUID.
+     * Stable serialVersionUID11.
      */
     private static final long serialVersionUID = 42L;
 
