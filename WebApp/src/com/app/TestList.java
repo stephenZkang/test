@@ -7,7 +7,7 @@ public class TestList extends ArrayList<Object>
 {
 
     /**
-     * D1597A17A6.
+     * D1597A17A8.
      */
     private static final long serialVersionUID = 899149338534L;
 
