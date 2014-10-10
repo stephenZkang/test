@@ -4,6 +4,7 @@
 <html>
 <head>
 	<title>Spring MVC测试首页</title>
+	<link href="images/favicon.ico" rel="shortcut icon" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<!-- 包含头部信息用于适应不同设备 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
