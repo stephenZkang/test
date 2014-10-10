@@ -117,4 +117,17 @@ public class TestLoginController {
 				.andExpect(status().is5xxServerError())			//返回ok的话
                 .andExpect(forwardedUrl("/WEB-INF/error/error.jsp"));	//跳转的页面
 	}
+	
+	/**
+	 * @throws Exception
+	 * 
+	 * @see 测试LoginController中的helloworld
+	 */
+	@Test
+	public void thatHelloWorld() throws Exception{
+		
+		this.mockMvc.perform(post("/helloWorld/{id}",1l))
+				.andExpect(status().is5xxServerError())			//返回ok的话
+                .andExpect(forwardedUrl("/WEB-INF/error/error.jsp"));	//跳转的页面
+	}
 }
