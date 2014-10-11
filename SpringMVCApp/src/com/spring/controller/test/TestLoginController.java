@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import java.util.Properties;
 
@@ -100,7 +101,7 @@ public class TestLoginController {
 		this.mockMvc.perform(post("/helloWorld/{id}",2l))
 				.andExpect(status().isOk())			//返回ok的话
                 .andExpect(view().name("views/helloworld"))		//映射到helloworld
-                .andExpect(model().attribute("message", "Hello World"))
+                .andExpect(model().attribute("message", "Hello World!"))
                 .andExpect(forwardedUrl("/WEB-INF/views/helloworld.jsp"));	//跳转的页面
 	}
 
@@ -128,6 +129,7 @@ public class TestLoginController {
 		
 		this.mockMvc.perform(post("/helloWorld/{id}",1l))
 				.andExpect(status().is5xxServerError())			//返回ok的话
+				.andDo(print())
                 .andExpect(forwardedUrl("/WEB-INF/error/error.jsp"));	//跳转的页面
 	}
 }

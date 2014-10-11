@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * @author qiaok
- * 
+ * 使用@WebAppConfiguration配置来加载配置文件
  * 
  *
  */
