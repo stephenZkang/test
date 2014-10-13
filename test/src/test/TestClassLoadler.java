@@ -27,7 +27,8 @@ public class TestClassLoadler {
 		ClassLoaderB classLoaderB = new ClassLoaderB();
 		Class<?> B = classLoaderB.loadClass("classloader.DomainA");
 		Object object = B.newInstance();
-		
+		System.out.println(object.getClass().getClassLoader());
+		System.out.println(DomainA.class.getClassLoader());
 		System.out.println(object instanceof DomainA);
 		
 		
@@ -59,6 +60,8 @@ public class TestClassLoadler {
 		 */
 		Object object2 = classLoader.loadClass("test.TestClassLoadler").newInstance();
 		System.out.println(object2.getClass());
+		System.out.println(object2.getClass().getClassLoader());
+		System.out.println(test.TestClassLoadler.class.getClassLoader());
 		System.out.println(object2 instanceof  test.TestClassLoadler);
 	}
 }
