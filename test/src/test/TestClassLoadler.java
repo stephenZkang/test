@@ -3,8 +3,6 @@ package test;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.junit.Test;
-
 import classloader.ClassLoaderA;
 import classloader.ClassLoaderB;
 import classloader.DomainA;
@@ -17,8 +15,7 @@ import classloader.DomainA;
  */
 public class TestClassLoadler {
 	
-	@Test
-	public void test() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
 		//自定义的类加载器ClassLoaderA
 		ClassLoaderA classLoaderA = new ClassLoaderA();
 		Class<?> A = classLoaderA.loadClass("classloader.DomainA");
@@ -44,12 +41,11 @@ public class TestClassLoadler {
 					if(inputStream == null){
 						return super.loadClass(name);
 					}
-					byte[] b;
-					b = new byte[inputStream.available()];
+					byte[] b = new byte[inputStream.available()];
 					inputStream.read(b);
 					return defineClass(name, b, 0,b.length);
 				} catch (IOException e) {
-					throw new ClassNotFoundException();
+					throw new ClassNotFoundException(name);
 				}
 			}
 		};
@@ -58,6 +54,5 @@ public class TestClassLoadler {
 		Object object2 = classLoader.loadClass("classloader.DomainA").newInstance();
 		System.out.println(object2.getClass());
 		System.out.println(object2 instanceof classloader.DomainA);
-		
 	}
 }
