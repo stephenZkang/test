@@ -8,4 +8,9 @@ package classloader;
  */
 public class ClassLoaderB extends ClassLoaderA {
 
+	@Override
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
+		return super.loadClass(name);
+	}
+
 }

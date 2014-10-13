@@ -20,7 +20,8 @@ public class TestClassLoadler {
 		ClassLoaderA classLoaderA = new ClassLoaderA();
 		Class<?> A = classLoaderA.loadClass("classloader.DomainA");
 		Object obj = A.newInstance();
-		
+		System.out.println(obj.getClass().getClassLoader());
+		System.out.println(DomainA.class.getClassLoader());
 		System.out.println(obj instanceof DomainA);
 		
 		//自定义的类加载器ClassLoaderB
@@ -60,7 +61,7 @@ public class TestClassLoadler {
 		 */
 		Object object2 = classLoader.loadClass("test.TestClassLoadler").newInstance();
 		System.out.println(object2.getClass());
-		System.out.println(object2.getClass().getClassLoader());
+		System.out.println(object2.getClass().getClassLoader().getClass());
 		System.out.println(test.TestClassLoadler.class.getClassLoader());
 		System.out.println(object2 instanceof  test.TestClassLoadler);
 	}
