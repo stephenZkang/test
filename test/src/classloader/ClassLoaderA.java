@@ -23,6 +23,9 @@ public class ClassLoaderA extends ClassLoader {
 			}
 			byte[] b = new byte[stream.available()];
 			stream.read(b);
+			/**
+			 * 将class文件加载到JVM中去
+			 */
 			return defineClass(name, b, 0, b.length);
 		} catch (IOException e) {
 			throw new ClassNotFoundException(name);
