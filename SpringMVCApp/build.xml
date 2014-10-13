@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     2014-10-13 下午04:36:06                                                        
+     project    
+     description
+     ====================================================================== -->
+<project name="project" default="default">
+	<description>
+            description
+    </description>
+
+	<!-- ================================= 
+          target: default              
+         ================================= -->
+	<target name="default" depends="depends" description="--> description">
+		<war destfile="SpringMVCApp.war" basedir="WebContent" update="true">
+			<classes dir="build/classes">
+			</classes>
+		</war>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="depends">
+
+	</target>
+
+</project>
