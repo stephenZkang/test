@@ -23,9 +23,9 @@
 </head>
 <body>
 	<div>
-		<h1 class="error">
+		<p class="error">
 			异常码: 500 ,服务端错误!
-		</h1>
+		</p>
 	</div>
 </body>
 </html>
