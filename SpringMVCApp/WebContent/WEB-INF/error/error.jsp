@@ -7,8 +7,10 @@
 <title>Error</title>
 </head>
 <body>
-	<span style="font-size: 40px;font-family:monospace;text-align:center;padding:10px;margin:10px;">
-		异常码: 500 ,服务端错误!
-	</span>
+	<div>
+		<span style="font-size: 40px;font-family:monospace;padding:70px;margin:350px;background-color: #33CCFF;color: #FFFFFF;">
+			异常码: 500 ,服务端错误!
+		</span>
+	</div>
 </body>
 </html>
