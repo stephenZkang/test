@@ -50,9 +50,15 @@ public class TestClassLoadler {
 			}
 		};
 		
-		
-		Object object2 = classLoader.loadClass("classloader.DomainA").newInstance();
+		/**
+		 *  test.TestClassLoadler类文件有System ClassLoader加载
+		 *  使用classLoader加载两个是不同的加载机制
+		 *  
+		 *  instanceof 判断机制是getClass()和getClassLoader()的机制都相同
+		 *  
+		 */
+		Object object2 = classLoader.loadClass("test.TestClassLoadler").newInstance();
 		System.out.println(object2.getClass());
-		System.out.println(object2 instanceof classloader.DomainA);
+		System.out.println(object2 instanceof  test.TestClassLoadler);
 	}
 }
