@@ -40,4 +40,6 @@
  <value>.jsp</value>
  </property>
  </bean>
+ 
+ <import resource="spring-hibernate.xml"/>
 </beans>
