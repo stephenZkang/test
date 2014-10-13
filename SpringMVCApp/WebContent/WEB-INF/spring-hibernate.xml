@@ -32,6 +32,10 @@
  	<property name="dataSource">
  		<ref bean="dataSource"/>
  	</property>
+ 	<property name="mappingResources">
+ 		<list>
+ 		</list>
+ 	</property>
  </bean>
  
  <!-- 还要配置一下事务管理器 -->
@@ -42,7 +46,7 @@
 	</bean>
 
 	<aop:config>
-		<aop:pointcut id="txMethod" expression="execution(* com.prince2270.study.*DAOImpl.*(..))" />
+		<aop:pointcut id="txMethod" expression="execution(* com.spring.service.*.*(..))" />
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txMethod"/>
 	</aop:config>
 	

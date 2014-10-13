@@ -3,7 +3,7 @@
   <display-name>SpringMVCApp</display-name>
   <context-param>
  <param-name>contextConfigLocation</param-name>
- <param-value>/WEB-INF/SpringMVCApp-servlet.xml</param-value>
+ <param-value>/WEB-INF/SpringMVCApp-servlet.xml,/WEB-INF/spring-hibernate.xml</param-value>
  </context-param>
  <listener>
 	 <listener-class>
