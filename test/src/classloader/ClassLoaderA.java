@@ -7,6 +7,7 @@ import java.io.InputStream;
  * 
  * @author qiaok
  * 自定义的ClassLoaderA类加载器
+ * 
  * 自定义类加载器需要重写loadClass方法，自己读取Class文件加载到VM中去.
  * 
  */
