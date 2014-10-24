@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- ===================== Bean Util ===================== -->
+  <bean id="SpringContextUtil " class="my.util.bean.SpringContextUtil" singleton="true" />
+  <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    <property name="jndiName">
+      <value>java:comp/env/jdbc/SuperredConsoleDB</value>
+    </property>
+  </bean>
+ 
+  <!-- 
+  <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+    <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/SuperredConsoleDB"></property>
+    <property name="user" value="security"></property>
+    <property name="password" value="s2u1p3e4r"></property>
+    
+    <property name="maxPoolSize" value="2"></property>
+    <property name="minPoolSize" value="1"></property>
+    <property name="initialPoolSize" value="1"></property>
+    <property name="maxIdleTime" value="20"></property> 
+  </bean>
+   -->
+  
+   
+  <!-- ===================== Hibernate SessionFactory ===================== -->
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <property name="dataSource">
+      <ref bean="dataSource" />
+    </property>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+        <prop key="hibernate.show_sql">false</prop>
+      </props>
+    </property>
+    <property name="mappingResources">
+      <list>
+        <!--
+        place your hibernate bean map file(*.hbm.xml) here like below
+        <value>my/db/model/User.hbm.xml</value>
+        -->
+        <!-- 公共 -->
+        <value>my/models/business/common/User.hbm.xml</value>
+        <value>my/models/business/common/Role.hbm.xml</value>
+        <value>my/models/business/common/Menu.hbm.xml</value>
+        <value>my/models/business/common/Module.hbm.xml</value>
+        <value>my/models/business/common/RoleModule.hbm.xml</value>
+        <value>my/models/business/common/RoleMenu.hbm.xml</value>
+        <value>my/models/business/common/AccountRevokedModule.hbm.xml</value>
+        
+        <value>my/models/business/common/AccountDesktopShortcut.hbm.xml</value>
+        <value>my/models/business/common/RoleDesktopShortcut.hbm.xml</value>
+
+        <value>my/models/business/common/Department.hbm.xml</value>
+        <value>my/models/business/common/OperateLog.hbm.xml</value>
+        <value>my/models/business/common/OperateLogType.hbm.xml</value>
+        <value>my/models/business/common/RegionLib.hbm.xml</value>
+        <value>my/models/business/common/Person.hbm.xml</value>
+        <value>my/models/business/common/Map.hbm.xml</value>
+        <value>my/models/business/common/PersonLog.hbm.xml</value>
+        <!-- 策略 -->
+        <value>my/models/business/policy/Policy.hbm.xml</value>
+        <value>my/models/business/policy/PolicySimple.hbm.xml</value>
+        <value>my/models/business/policy/PolicyContentType.hbm.xml</value>
+        <value>my/models/business/policy/PolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/CriticalLevel.hbm.xml</value>
+        <!-- 策略分发 -->
+        <value>my/models/business/policy/issue/ComputerPolicy.hbm.xml</value>
+        <value>my/models/business/policy/issue/DepartmentPolicy.hbm.xml</value>
+        <!-- 服务策略 -->
+        <value>my/models/business/policy/ServiceAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/ServiceList.hbm.xml</value>
+        <!-- 进程策略 -->
+        <value>my/models/business/policy/ProcessAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/ProcessList.hbm.xml</value>
+        <value>my/models/business/policy/ProcessActionList.hbm.xml</value>
+        <value>my/models/business/policy/ProcessAlarmPolicyContent.hbm.xml</value>
+        <!-- 主机状态 -->
+        <value>my/models/business/policy/HostStateAuditPolicyContent.hbm.xml</value>
+        <!-- 主机配置（注册表）-->
+        <value>my/models/business/policy/SystemConfigAlarmList.hbm.xml</value>
+        <value>my/models/business/policy/SystemConfigAuditList.hbm.xml</value>
+        <value>my/models/business/policy/SystemConfigAuditPolicyContent.hbm.xml</value> 
+        <!-- 网络连接 -->
+        <value>my/models/business/policy/NetworkAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/NetworkProtocol.hbm.xml</value>
+        <value>my/models/business/policy/NetworkList.hbm.xml</value>
+        <!-- 文档输出 -->
+        <value>my/models/business/policy/DocumentExportAuditPolicyContent.hbm.xml</value>
+        <!-- 网络流量 -->
+        <value>my/models/business/policy/NetflowAuditPolicyContent.hbm.xml</value>
+        <!-- 文件审计 -->
+        <value>my/models/business/policy/FilePathAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/FilePathAuditType.hbm.xml</value>
+        <value>my/models/business/policy/FilePathAuditList.hbm.xml</value>
+        <!-- 设备控制 -->
+        <value>my/models/business/policy/DeviceControlPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/DeviceControlPolicyList.hbm.xml</value>
+        <!-- 硬件变更 -->
+        <value>my/models/business/policy/HardwareAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/DeviceCode.hbm.xml</value>
+        <value>my/models/business/policy/HostDeviceAuditList.hbm.xml</value>
+        <value>my/models/business/policy/HostDeviceControlList.hbm.xml</value>
+        <!-- 软件安装 -->
+        <value>my/models/business/policy/SoftwareAuditPolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/HostSoftwareInstallControlList.hbm.xml</value>
+        <!-- 系统开机 -->
+        <value>my/models/business/policy/PowerAuditPolicyContent.hbm.xml</value>
+        <!-- 复合策略 -->
+        <value>my/models/business/policy/CompoundPolicyContent.hbm.xml</value>
+        <!-- 敏感信息 -->
+        <value>my/models/business/policy/KeywordLib.hbm.xml</value>
+        <value>my/models/business/policy/AlarmMethod.hbm.xml</value>
+        <value>my/models/business/policy/LevelMethodSetting.hbm.xml</value>
+        <value>my/models/business/policy/ViolationLevel.hbm.xml</value>
+        <value>my/models/business/policy/LucenePolicyContent.hbm.xml</value>
+        <value>my/models/business/policy/NetFilterPolicyContent.hbm.xml</value>
+        <!-- 检查工具 -->
+        <value>my/models/business/policy/CheckerPolicyContent.hbm.xml</value>
+        <!-- 非授权接入设备管理策略 -->
+        <value>my/models/business/policy/UnAuthHostAccess.hbm.xml</value>
+        <!-- 违规外联报警策略 -->
+        <value>my/models/business/policy/InetViolationPolicyContent.hbm.xml</value>
+        <!-- 专用优盘策略 -->
+        <value>my/models/business/policy/SpecialUdiskPolicyContent.hbm.xml</value>
+        <!-- 插件优盘策略 -->
+        <value>my/models/business/policy/PluginDLLUDiskPolicyContent.hbm.xml</value>
+        <!-- 普通优盘策略 -->
+        <value>my/models/business/policy/GeneralUdiskPolicyContent.hbm.xml</value>
+        <!-- 二型优盘策略 -->
+        <value>my/models/business/policy/GeneralUdiskType2PolicyContent.hbm.xml</value>
+        <!-- 公安安全优盘策略 -->
+        <value>my/models/business/policy/SafeUdiskPolicyContent.hbm.xml</value>
+        <!-- 系统补丁审计策略 -->
+        <value>my/models/business/policy/SystemPatchPolicyContent.hbm.xml</value>
+        <!-- 系统设置 -->        
+        <value>my/models/business/config/SystemSetting.hbm.xml</value>
+        <!-- 运维配置 -->
+        <value>my/models/business/config/DepartmentControlLevelSetting.hbm.xml</value>
+        <value>my/models/business/config/HostLeakLevelSetting.hbm.xml</value>
+        <!-- 设备信息描述代码维护 -->
+        <value>my/models/business/config/HDevice.hbm.xml</value>
+        <!-- 网卡信息匹配 -->
+        <value>my/models/business/config/NicInfos.hbm.xml</value>
+        <!-- 系统补丁代码库管理 -->
+        <value>my/models/business/config/PatchInfo.hbm.xml</value>
+        <!-- 人员权限管理  -->
+        <value>my/models/business/config/ClientRights.hbm.xml</value>
+        <value>my/models/business/config/PersonRight.hbm.xml</value>
+        <!-- 主机补丁 -->
+        <value>my/models/business/data/ComputerPathData.hbm.xml</value>
+        <!-- 主机 -->
+        <value>my/models/business/common/host/Computer.hbm.xml</value>
+        <value>my/models/business/common/host/ComputerOsVersion.hbm.xml</value>
+        <value>my/models/business/common/host/ComputerSimple.hbm.xml</value>
+        <value>my/models/business/common/host/CascadeHostInfo.hbm.xml</value>
+        <!-- 主机异常日志 -->
+        <value>my/models/business/common/host/AgentErrorLogInfo.hbm.xml</value>
+        
+        <!-- 插件优盘DLL管理 -->
+        <value>my/models/business/udisk/UdiskPluginDll.hbm.xml</value>
+        <value>my/models/business/udisk/SpecialUDisk.hbm.xml</value>
+        <value>my/models/business/udisk/UDiskAccessLog.hbm.xml</value>
+        <value>my/models/business/udisk/UDiskSerial.hbm.xml</value>
+        <value>my/models/business/udisk/GeneralUdisk.hbm.xml</value>
+        <value>my/models/business/udisk/GeneralUdiskType2.hbm.xml</value>
+        <value>my/models/business/udisk/SafeUDisk.hbm.xml</value>
+        <value>my/models/business/udisk/SafeUDiskLogData.hbm.xml</value>
+        <!-- 
+        <value>my/models/business/common/host/CpuInfo.hbm.xml</value>
+        <value>my/models/business/common/host/OsInfo.hbm.xml</value>
+        <value>my/models/business/common/host/AdapterAddress.hbm.xml</value>
+        <value>my/models/business/common/host/AdapterAddressType.hbm.xml</value>
+        <value>my/models/business/common/host/HardDiskInfo.hbm.xml</value>
+        <value>my/models/business/common/host/HardwareInfo.hbm.xml</value>
+        <value>my/models/business/common/host/HardwareStatus.hbm.xml</value>
+        <value>my/models/business/common/host/HardwareType.hbm.xml</value>
+        <value>my/models/business/common/host/NetAdapterInfo.hbm.xml</value>
+        <value>my/models/business/common/host/PartionInfo.hbm.xml</value>
+        <value>my/models/business/common/host/PartionType.hbm.xml</value>
+        <value>my/models/business/common/host/Person.hbm.xml</value>
+        <value>my/models/business/common/host/AgentCommand.hbm.xml</value>
+        <value>my/models/business/common/host/ComputerCommand.hbm.xml</value>
+         -->
+        
+        <!-- 审计数据 -->
+        <value>my/models/business/data/AuditData.hbm.xml</value>
+        
+        <value>my/models/business/data/CheckerData.hbm.xml</value>
+        <value>my/models/business/data/AuditType.hbm.xml</value>
+        <value>my/models/business/data/BehaviourType.hbm.xml</value>
+        <value>my/models/business/data/EventType.hbm.xml</value>
+
+        <value>my/models/business/data/DataDealHistory.hbm.xml</value>
+        <value>my/models/business/data/LuceneData.hbm.xml</value>
+        <value>my/models/business/data/LuceneWhiteFileList.hbm.xml</value>
+        <value>my/models/business/data/NetFilterData.hbm.xml</value>
+        <value>my/models/business/data/ViolationConnectionData.hbm.xml</value>
+        
+        <value>my/models/business/lucene/LuceneDataDealLog.hbm.xml</value>
+        <value>my/models/business/lucene/LuceneUploadFileList.hbm.xml</value>
+        <value>my/models/business/lucene/NetFilterDataDealLog.hbm.xml</value>
+        
+        <!-- 非授权设备接入 -->
+        <value>my/models/business/data/UnAuthHostAccessData.hbm.xml</value>
+        
+        <!-- 主机命令 -->
+        <value>my/models/business/command/OpenfireCommand.hbm.xml</value>
+        <!-- fusion -->
+        <value>my/models/business/fusion/Region2Entity.hbm.xml</value>
+        
+        <!-- 检查工具 -->
+        <value>my/models/business/checktools/BaninetCheck.hbm.xml</value>
+        <value>my/models/business/checktools/BaseCheck.hbm.xml</value>
+        <value>my/models/business/checktools/BaseClientType.hbm.xml</value>
+        <value>my/models/business/checktools/BaseConfig.hbm.xml</value>
+        <value>my/models/business/checktools/BaseSkill.hbm.xml</value>
+        <value>my/models/business/checktools/DefendVirusSoftwareCheck.hbm.xml</value>
+        <value>my/models/business/checktools/DepthCheckBaninet.hbm.xml</value>
+        <value>my/models/business/checktools/DepthCheckFileData.hbm.xml</value>
+        <value>my/models/business/checktools/DepthCheckFileOpt.hbm.xml</value>
+        <value>my/models/business/checktools/DepthCheckUsb.hbm.xml</value>
+        <value>my/models/business/checktools/DialCheck.hbm.xml</value>
+        <value>my/models/business/checktools/Driver.hbm.xml</value>
+        <value>my/models/business/checktools/FileCheck.hbm.xml</value>
+        <value>my/models/business/checktools/FileScan.hbm.xml</value>
+        <value>my/models/business/checktools/HardVolume.hbm.xml</value>
+        <value>my/models/business/checktools/InstallSoftCheck.hbm.xml</value>
+        <value>my/models/business/checktools/Keyword.hbm.xml</value>
+        <value>my/models/business/checktools/NetPortCheck.hbm.xml</value>
+        <value>my/models/business/checktools/OperationLog.hbm.xml</value>
+        <value>my/models/business/checktools/OsCheck.hbm.xml</value>
+        <value>my/models/business/checktools/OsSp.hbm.xml</value>
+        <value>my/models/business/checktools/PolCheck.hbm.xml</value>
+        <value>my/models/business/checktools/ProcessCheck.hbm.xml</value>
+        <value>my/models/business/checktools/ServiceCheck.hbm.xml</value>
+        <value>my/models/business/checktools/Share.hbm.xml</value>
+        <value>my/models/business/checktools/SoftwareListCheck.hbm.xml</value>
+        <value>my/models/business/checktools/TaskInfo.hbm.xml</value>
+        <value>my/models/business/checktools/TaskPlan.hbm.xml</value>
+        <value>my/models/business/checktools/UsbDeviceCheck.hbm.xml</value>
+        <value>my/models/business/checktools/UserAccount.hbm.xml</value>
+        <value>my/models/business/checktools/ViolationFilemng.hbm.xml</value>
+        <value>my/models/business/checktools/VirusData.hbm.xml</value>
+        <value>my/models/business/checktools/WinlogCheck.hbm.xml</value>
+        <value>my/models/business/checktools/WinUserpwCheck.hbm.xml</value>
+        <value>my/models/business/checktools/WiressCheck.hbm.xml</value>
+        <value>my/models/business/checktools/ClientSkillConfig.hbm.xml</value>
+        <value>my/models/business/checktools/VpDataDescription.hbm.xml</value>
+        <value>my/models/business/checktools/TaskVpInfo.hbm.xml</value>
+        
+      </list>
+    </property>
+  </bean>
+
+  <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+  <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+  </bean>
+
+  <!-- ===================== DAO ===================== -->
+  <bean id="baseDAO" class="my.daos.base.BaseDAO" abstract="true">
+     <property name="sessionFactory"><ref local="sessionFactory"/></property>
+  </bean>
+
+  <bean id="userDAO" class="my.daos.business.common.UserDAO" parent="baseDAO">
+  </bean> 
+  <bean id="roleDAO" class="my.daos.business.common.RoleDAO" parent="baseDAO">
+  </bean> 
+  <bean id="menuDAO" class="my.daos.business.common.MenuDAO" parent="baseDAO">
+  </bean> 
+  <bean id="moduleDAO" class="my.daos.business.common.ModuleDAO" parent="baseDAO">
+  </bean> 
+  <bean id="roleModuleDAO" class="my.daos.business.common.RoleModuleDAO" parent="baseDAO">
+  </bean> 
+  <bean id="roleMenuDAO" class="my.daos.business.common.RoleMenuDAO" parent="baseDAO">
+  </bean> 
+  <bean id="accountDesktopShortcutDAO" class="my.daos.business.common.AccountDesktopShortcutDAO" parent="baseDAO">
+  </bean> 
+  <bean id="roleDesktopShortcutDAO" class="my.daos.business.common.RoleDesktopShortcutDAO" parent="baseDAO">
+  </bean> 
+  <bean id="accountRevokedModuleDAO" class="my.daos.business.common.AccountRevokedModuleDAO" parent="baseDAO">
+  </bean> 
+  
+  <bean id="regionLibDAO" class="my.daos.business.common.RegionLibDAO" parent="baseDAO">
+  </bean> 
+  <bean id="departmentDAO" class="my.daos.business.common.DepartmentDAO" parent="baseDAO">
+  </bean> 
+  <bean id="personDAO" class="my.daos.business.common.PersonDAO" parent="baseDAO">
+  </bean> 
+  <bean id="operateLogDAO" class="my.daos.business.common.OperateLogDAO" parent="baseDAO">
+  </bean> 
+  <bean id="operateLogTypeDAO" class="my.daos.business.common.OperateLogTypeDAO" parent="baseDAO">
+  </bean> 
+  <bean id="systemSettingDAO" class="my.daos.business.config.SystemSettingDAO" parent="baseDAO">
+  </bean>
+  <bean id="mapDAO" class="my.daos.business.common.MapDAO" parent="baseDAO">
+  </bean>
+  <bean id="departmentControlLevelSettingDAO" class="my.daos.business.config.DepartmentControlLevelSettingDAO" parent="baseDAO">
+  </bean>
+  <bean id="hostLeakLevelSettingDAO" class="my.daos.business.config.HostLeakLevelSettingDAO" parent="baseDAO">
+  </bean>
+  <bean id="openfireCommandDAO" class="my.daos.business.command.OpenfireCommandDAO" parent="baseDAO">
+  </bean>
+  <bean id="personLogDAO" class="my.daos.business.common.PersonLogDAO" parent="baseDAO">
+  </bean> 
+  <bean id="region2EntityDAO" class="my.daos.business.fusion.Region2EntityDAO" parent="baseDAO">
+  </bean> 
+  <bean id="hDeviceDAO" class="my.daos.business.config.HDeviceDAO" parent="baseDAO">
+  </bean>
+  <bean id="nicInfosDAO" class="my.daos.business.config.NicInfosDAO" parent="baseDAO">
+  </bean>
+  <bean id="patchInfoDAO" class="my.daos.business.config.PatchInfoDAO" parent="baseDAO">
+  </bean>
+  <bean id="clientRightsDAO" class="my.daos.business.config.ClientRightsDAO" parent="baseDAO">
+  </bean>
+  <bean id="personRightDAO" class="my.daos.business.config.PersonRightDAO" parent="baseDAO">
+  </bean>
+  <!-- ========================= business bean ========================= -->
+  <bean id="userManager" class="my.services.business.common.UserManager">
+    <property name="dao"><ref bean="userDAO"/></property>
+  </bean>
+  <bean id="userManagerTrans" 
+      class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+	<property name="transactionManager"><ref bean="transactionManager"/></property>
+	<property name="target"><ref bean="userManager"/></property>
+	<property name="transactionAttributes">
+		<props>
+		  <prop key="testTrans">PROPAGATION_REQUIRED</prop>
+		</props>
+	</property>
+  </bean>
+  <bean id="roleManager" class="my.services.business.common.RoleManager">
+    <property name="dao"><ref bean="roleDAO"/></property>
+  </bean>
+  <bean id="menuManager" class="my.services.business.common.MenuManager">
+    <property name="dao"><ref bean="menuDAO"/></property>
+  </bean>
+  <bean id="moduleManager" class="my.services.business.common.ModuleManager">
+    <property name="dao"><ref bean="moduleDAO"/></property>
+  </bean>
+  <bean id="roleModuleManager" class="my.services.business.common.RoleModuleManager">
+    <property name="dao"><ref bean="roleModuleDAO"/></property>
+  </bean>
+  <bean id="roleMenuManager" class="my.services.business.common.RoleMenuManager">
+    <property name="dao"><ref bean="roleMenuDAO"/></property>
+  </bean>
+  <bean id="accountDesktopShortcutManager" class="my.services.business.common.AccountDesktopShortcutManager">
+    <property name="dao"><ref bean="accountDesktopShortcutDAO"/></property>
+  </bean>
+  <bean id="roleDesktopShortcutManager" class="my.services.business.common.RoleDesktopShortcutManager">
+    <property name="dao"><ref bean="roleDesktopShortcutDAO"/></property>
+  </bean>
+  <bean id="accountRevokedModuleManager" class="my.services.business.common.AccountRevokedModuleManager">
+    <property name="dao"><ref bean="accountRevokedModuleDAO"/></property>
+  </bean>
+  
+  <bean id="regionLibManager" class="my.services.business.common.RegionLibManager">
+    <property name="dao"><ref bean="regionLibDAO"/></property>
+  </bean>
+
+  <bean id="departmentManager" class="my.services.business.common.DepartmentManager">
+    <property name="dao"><ref bean="departmentDAO"/></property>
+    <property name="personDao"><ref bean="personDAO"/></property>
+    <property name="computerDAO"><ref bean="computerDAO"/></property>
+    <property name="userDAO"><ref bean="userDAO"/></property>
+  </bean>
+  <bean id="personManager" class="my.services.business.common.PersonManager">
+    <property name="dao"><ref bean="personDAO"/></property>
+  </bean>
+  <bean id="operateLogManager" class="my.services.business.common.OperateLogManager">
+    <property name="dao"><ref bean="operateLogDAO"/></property>
+  </bean>
+  <bean id="operateLogTypeManager" class="my.services.business.common.OperateLogTypeManager">
+    <property name="dao"><ref bean="operateLogTypeDAO"/></property>
+  </bean>
+  <bean id="systemSettingManager" class="my.services.business.config.SystemSettingManager">
+    <property name="dao"><ref bean="systemSettingDAO"/></property>
+  </bean>
+  <bean id="mapManager" class="my.services.business.common.MapManager">
+    <property name="dao"><ref bean="mapDAO"/></property>
+  </bean>
+  <bean id="departmentControlLevelSettingManager" class="my.services.business.config.DepartmentControlLevelSettingManager">
+    <property name="dao"><ref bean="departmentControlLevelSettingDAO"/></property>
+  </bean>
+  <bean id="hostLeakLevelSettingManager" class="my.services.business.config.HostLeakLevelSettingManager">
+    <property name="dao"><ref bean="hostLeakLevelSettingDAO"/></property>
+  </bean>
+  <bean id="openfireCommandManager" class="my.services.business.command.OpenfireCommandManager">
+    <property name="dao"><ref bean="openfireCommandDAO"/></property>
+  </bean>
+  <bean id="personLogManager" class="my.services.business.common.PersonLogManager">
+    <property name="dao"><ref bean="personLogDAO"/></property>
+  </bean>
+  <bean id="region2EntityManager" class="my.services.business.fusion.Region2EntityManager">
+    <property name="dao"><ref bean="region2EntityDAO"/></property>
+  </bean>
+  <bean id="hDeviceManager" class="my.services.business.config.HDeviceManager">
+  	<property name="dao"><ref bean="hDeviceDAO"/></property>
+  </bean>
+  <bean id="nicInfosManager" class="my.services.business.config.NicInfosManager">
+    <property name="dao"><ref bean="nicInfosDAO"/></property>
+  </bean>
+  <bean id="patchInfoManager" class="my.services.business.config.PatchInfoManager">
+    <property name="dao"><ref bean="patchInfoDAO"/></property>
+  </bean>
+  <bean id="clientRightsManager" class="my.services.business.config.ClientRightsManager">
+    <property name="dao"><ref bean="clientRightsDAO"/></property>
+  </bean>
+  <bean id="personRightManager" class="my.services.business.config.PersonRightManager">
+    <property name="dao"><ref bean="personRightDAO"/></property>
+  </bean>
+</beans>
