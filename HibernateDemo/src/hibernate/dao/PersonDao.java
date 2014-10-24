@@ -7,7 +7,7 @@ import java.util.List;
 public interface PersonDao {
   /**
   * @Title: save 
-  * @Description: FIXME(保存人员) 
+  * @Description: 保存人员
   * @param @param person  人员 
   * @return void    返回类型 
   * @throws
@@ -24,7 +24,7 @@ public interface PersonDao {
   /**
    * 
   * @Title: getRandom 
-  * @Description: FIXME(随机获取一个人员信息) 
+  * @Description: 随机获取一个人员信息
   * @param @return     
   * @return Person    人员信息 
   * @throws
@@ -32,7 +32,7 @@ public interface PersonDao {
   public Person getRandom();
   /**
   * @Title: listPersons 
-  * @Description: FIXME(获取人员集合) 
+  * @Description: 获取人员集合
   * @param @return     
   * @return List<Person>    返回类型 人员集合 
   * @throws

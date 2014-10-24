@@ -54,7 +54,7 @@ public class PersonDaoImpl extends BaseDaoImpl implements PersonDao {
   /**
    * 
   * @Title: updatePersons 
-  * @Description: FIXME(将人员名为lucy的修改为jack) 
+  * @Description: 将人员名为lucy的修改为jack
   * @param     设定文件 
   * @return void    返回类型 
   * @throws
@@ -72,7 +72,7 @@ public class PersonDaoImpl extends BaseDaoImpl implements PersonDao {
   /**
    * 
   * @Title: updatePs 
-  * @Description: FIXME(将人员id在ids中的人员更新) 
+  * @Description: 将人员id在ids中的人员更新 
   * @param @param ids    人员id的集合 
   * @return void    返回类型 
   * @throws

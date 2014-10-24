@@ -3,7 +3,7 @@ package hibernate.domain;
 /**
  * 
 * @ClassName: Person 
-* @Description: FIXME() 
+* @Description: 人员信息
 * @author A18ccms a18ccms_gmail_com 
 * @date Sep 25, 2014 8:49:38 AM 
 *
