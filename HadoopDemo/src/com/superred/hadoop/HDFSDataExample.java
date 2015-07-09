@@ -55,7 +55,7 @@ public class HDFSDataExample {
 		OutputStream out = null;
 		try {
 			Configuration conf = new Configuration();
-			FileSystem fs = FileSystem.get(URI.create("hdfs://192.168.93.33:9000"), conf);
+			FileSystem fs = FileSystem.get(URI.create("hdfs://192.168.93.36:9000"), conf);
 			Path path = new Path(hdfsPath);
 			in = fs.open(path);
 			out = new BufferedOutputStream(new FileOutputStream(new File(localPath)));
