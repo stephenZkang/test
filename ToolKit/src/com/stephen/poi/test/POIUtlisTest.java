@@ -1,5 +1,7 @@
 package com.stephen.poi.test;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,34 @@ public class POIUtlisTest {
 		String sheetName = "季度报表";
 		String fileName = "d://demo1.xls";
 		POIUtils.exportExcel(headers, widths, content, fileName, sheetName,2);
+		
+	}
+	
+	@Test
+	public void exportByTemplate(){
+		File file = new File("template/temp.xls");
+		FileInputStream stream;
+		try {
+			stream = new FileInputStream(file);
+			HSSFWorkbook workbook = new HSSFWorkbook(stream);
+			HSSFSheet sheet = workbook.getSheetAt(0);
+			HSSFCellStyle cellStyle = POIUtils.createContentStyle(workbook, 14);
+			HSSFRow contentRow = POIUtils.createContentRow(workbook, sheet, null, 1, 1);
+			POIUtils.createConentCell(sheet, contentRow, 0, "Jack", cellStyle);
+			POIUtils.createConentCell(sheet, contentRow, 1, 20, cellStyle,15);
+			contentRow = POIUtils.createContentRow(workbook, sheet, null, 1, 2);
+			POIUtils.createConentCell(sheet, contentRow, 0, "Tim", cellStyle);
+			POIUtils.createConentCell(sheet, contentRow, 1, 25, cellStyle,15);
+			contentRow = POIUtils.createContentRow(workbook, sheet, null, 1, 3);
+			POIUtils.createConentCell(sheet, contentRow, 0, "Lucy", cellStyle);
+			POIUtils.createConentCell(sheet, contentRow, 1, 18, cellStyle,15);
+			contentRow = POIUtils.createContentRow(workbook, sheet, null, 1, 4);
+			POIUtils.createConentCell(sheet, contentRow, 0, "Mary", cellStyle);
+			POIUtils.createConentCell(sheet, contentRow, 1, 16, cellStyle,15);
+			POIUtils.closeWork("d://a.xls", workbook);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 }
