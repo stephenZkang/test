@@ -1,4 +1,4 @@
-package com.stephen.poi.test;
+package com.stephen.test;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.junit.Test;
 
-import com.stephen.poi.utils.POIUtils;
+import com.stephen.utils.POIUtils;
 
 
 /**
