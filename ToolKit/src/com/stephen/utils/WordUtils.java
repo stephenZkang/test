@@ -35,7 +35,10 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.Phrase;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.Table;
+import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.rtf.RtfWriter2;
+import com.lowagie.text.rtf.field.RtfPageNumber;
+import com.lowagie.text.rtf.headerfooter.RtfHeaderFooter;
 
 
 /**
@@ -121,8 +124,7 @@ public class WordUtils {
 	 * @throws DocumentException 
 	 */
 	public static Paragraph createTitleParagraph(
-			Document document, String content,int lead,int size) throws DocumentException {
-		Font font = WordUtils.createFont(Color.BLACK,size,"宋体",Font.BOLD);
+			Document document, String content,int lead,Font font) throws DocumentException {
 		Paragraph paragraph = new Paragraph(content,font);
 		//设置对齐方式
 		paragraph.setAlignment(Paragraph.ALIGN_CENTER);
@@ -142,8 +144,7 @@ public class WordUtils {
 	 * @throws DocumentException 
 	 */
 	public static Paragraph createContentParagraph(
-			Document document, String content,int lead,int indent) throws DocumentException {
-		Font font = WordUtils.createFont(Color.BLACK,12,"宋体",Font.NORMAL);
+			Document document, String content,int lead,int indent,Font font) throws DocumentException {
 		Paragraph paragraph = new Paragraph(content,font);
 		//设置对齐方式
 		paragraph.setAlignment(Paragraph.ALIGN_LEFT);
@@ -152,6 +153,22 @@ public class WordUtils {
 		paragraph.setFirstLineIndent(indent);
 		document.add(paragraph);
 		return paragraph;
+	}
+	
+	/**
+	 * 创建字体
+	 * @param color		字体颜色
+	 * @param size		字体大小
+	 * @param family	字体
+	 * @param bold		是否粗体
+	 * @return
+	 */
+	public static Font createFont(Color color, int size, BaseFont family,int bold) {
+		Font font = new Font(family,size,bold,color);
+		if(color!=null){
+			font.setColor(color);
+		}
+		return font;
 	}
 	
 	/**
@@ -410,5 +427,26 @@ public class WordUtils {
 	    cell.setRowspan(row);
 	    cell.setColspan(col);
 	    table.addCell(cell);
+	  }
+	  
+	  /**
+	   * 页码
+	   * @param content
+	   * @param font
+	   * @return
+	   */
+	  public static RtfHeaderFooter createFooter(String content,Font font) {
+		Paragraph parafooter = new Paragraph();  
+		if(font==null){
+			parafooter.setFont(new Font(Font.TIMES_ROMAN,14,Font.NORMAL,new Color(0,0,0)));
+		}else{
+			parafooter.setFont(font);
+		}
+		parafooter.add(content);
+		parafooter.add(new RtfPageNumber());
+		parafooter.add(content);
+		parafooter.setAlignment(Paragraph.ALIGN_LEFT); 
+		RtfHeaderFooter footer = new RtfHeaderFooter(parafooter);
+		return footer;
 	  }
 }

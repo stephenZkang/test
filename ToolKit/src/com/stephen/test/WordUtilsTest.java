@@ -1,5 +1,7 @@
 package com.stephen.test;
 
+import java.awt.Color;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,10 @@ import java.util.List;
 import org.junit.Test;
 
 import com.lowagie.text.Document;
+import com.lowagie.text.Font;
 import com.lowagie.text.PageSize;
+import com.lowagie.text.pdf.BaseFont;
+import com.lowagie.text.rtf.headerfooter.RtfHeaderFooter;
 import com.stephen.utils.WordUtils;
 
 /**
@@ -35,13 +40,18 @@ public class WordUtilsTest {
 		/**
 		 * 插入文本
 		 */
-		WordUtils.createContentParagraph(document,buffer.toString(),30,20);
+		//仿宋_GB_2312
+		BaseFont bfChinese = BaseFont.createFont("font"+File.separator+"仿宋_GB2312.ttf",
+			      BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+		Font cfont = WordUtils.createFont(Color.BLACK,20,bfChinese,Font.NORMAL);
+		WordUtils.createContentParagraph(document,buffer.toString(),30,20,cfont);
 		WordUtils.createSpaceParagraph(document,4);
 		
 		/**
 		 * 插入图片
 		 */
-		WordUtils.createTitleParagraph(document, "火箭年龄趋势图", 20, 20);
+		Font font = WordUtils.createFont(Color.BLACK,20,"宋体",Font.BOLD);
+		WordUtils.createTitleParagraph(document, "火箭年龄趋势图", 20, font);
 		int[] datas = {10,15,25,55};
 		WordUtils.createPicByJfreeChart(document, datas, "年龄趋势图", "人员", "年龄", 0, 0);
 		WordUtils.createPicByJfreeChart(document, datas, "年龄趋势图", "人员", "年龄", 0, 0);
@@ -50,7 +60,7 @@ public class WordUtilsTest {
 		/**
 		 * 插入表格
 		 */
-		WordUtils.createTitleParagraph(document, "火箭首发人员名单", 20, 20);
+		WordUtils.createTitleParagraph(document, "火箭首发人员名单", 20, font);
 		String[] headers = new String[]{"序号","姓名","性别"}; 
 		List<String> con = new ArrayList<String>();
 		con.add("1");con.add("Jack");con.add("男");
@@ -58,7 +68,11 @@ public class WordUtilsTest {
 		content.add(con);content.add(con);content.add(con);content.add(con);
 		int[] widths = new int[]{1,2,2};
 		WordUtils.createTable(document,headers,content,widths);
-
+		
+		RtfHeaderFooter footer = WordUtils.createFooter("-",null);
+		document.setFooter(footer);
+		
 		WordUtils.closeDocument(document,stream);
 	}
+
 }
