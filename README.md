@@ -10,6 +10,8 @@
 	  XstreamDemo是基于Xstream的Java对象和xml之间的转换。
 	  
 	  ToolKit是日常工作中工具集的积累。
-	  		如：基于POI的excel导出
+	  		如：a、基于POI的excel导出
+	  		    b、基于itext导出word文档
+	  		    c、基于ant进行zip格式的文件压缩
 	  		
 	  Mina是基础Mina的服务器框架研究
