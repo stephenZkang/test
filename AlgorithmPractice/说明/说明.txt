@@ -1,0 +1,5 @@
+1、栈
+	a、kang.example.LinkStack	基于链表实现
+	b、kang.example.Stack		基于数组实现
+	c、设计含最小函数min()的栈，要求min、push、pop。min方法的作用是：就能返回是栈中的最小值。
+		kang.example.StackWithMinFun 时间复杂度为O(1)
