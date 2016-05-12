@@ -1,5 +1,10 @@
 package kang.example1;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.TreeMap;
+
 /**
  * 求子数组和的最大值
  * @author qiao123
@@ -69,5 +74,12 @@ public class Practice {
 	public static void main(String[] args) {
 		findMaxSubArrSum();
 		findMaxSubArrSumN();
+		
+		HashMap<String, Object> m = new HashMap<String, Object>();
+		TreeMap<String, Object> tm = new TreeMap<String, Object>();
+		LinkedHashMap<String, Object> lm= new LinkedHashMap<String, Object>();
+		LinkedList<Object> ll = new LinkedList<Object>();
+		
+		
 	}
 }
