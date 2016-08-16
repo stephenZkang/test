@@ -46,12 +46,57 @@ Created on 2016-8-9
 # fo.close()
 
 #异常处理
-try:
-    nfile = open("d://log.txt","r")
+# try:
+#     nfile = open("d://log.txt","r")
+# 
+#     s = nfile.read(10)
+#     print s
+# except IOError:
+#     print "读文件失败"
+# else:
+#     nfile.close()
+    
+    
+#文件夹操作
+# import os
+# 
+# f = os._exists("d:/test")
+# if f:
+#     os.rmdir("d://test")
+#     
+# if f:
+#     os.mkdir("d:/test")
 
-    s = nfile.read(10)
-    print s
-except IOError:
-    print "读文件失败"
-else:
-    nfile.close()
+#创建函数
+
+def add(a,b):
+    "加法"
+    ++a
+    s = a+b
+    return s
+
+print add(1,2)
+
+def reduc(a,b):
+    "减法"
+    s = add(a,b)-a
+    return s
+
+print reduc(2,3)
+
+a = 2;b =3
+
+print add(a, b)
+print a
+
+# PYTHON 全是引用传值
+def changeme(mylist):
+    tmp = []
+    tmp.append(mylist)
+    tmp.append([1,2,3,4])
+    print "函数内取值：",tmp
+    return
+
+mylist = [1,2,3,4]
+changeme(mylist)
+print mylist
