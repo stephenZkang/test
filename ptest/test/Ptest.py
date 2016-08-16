@@ -28,4 +28,5 @@ for v in i:
 
 
 #命令行输入
-
+s = raw_input("请输入:")
+print s
