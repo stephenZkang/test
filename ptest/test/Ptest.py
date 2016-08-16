@@ -45,3 +45,13 @@ Created on 2016-8-9
 # 
 # fo.close()
 
+#异常处理
+try:
+    nfile = open("d://log.txt","r")
+
+    s = nfile.read(10)
+    print s
+except IOError:
+    print "读文件失败"
+else:
+    nfile.close()
