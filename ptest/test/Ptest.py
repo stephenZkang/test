@@ -69,34 +69,40 @@ Created on 2016-8-9
 
 #创建函数
 
-def add(a,b):
-    "加法"
-    ++a
-    s = a+b
-    return s
-
-print add(1,2)
-
-def reduc(a,b):
-    "减法"
-    s = add(a,b)-a
-    return s
-
-print reduc(2,3)
-
-a = 2;b =3
-
-print add(a, b)
-print a
+# def add(a,b):
+#     "加法"
+#     ++a
+#     s = a+b
+#     return s
+# 
+# print add(1,2)
+# 
+# def reduc(a,b):
+#     "减法"
+#     s = add(a,b)-a
+#     return s
+# 
+# print reduc(2,3)
+# 
+# a = 2;b =3
+# 
+# print add(a, b)
+# print a
 
 # PYTHON 全是引用传值
-def changeme(mylist):
-    tmp = []
-    tmp.append(mylist)
-    tmp.append([1,2,3,4])
-    print "函数内取值：",tmp
-    return
+# def changeme(mylist):
+#     tmp = []
+#     tmp.append(mylist)
+#     tmp.append([1,2,3,4])
+#     print "函数内取值：",tmp
+#     return
+# 
+# mylist = [1,2,3,4]
+# changeme(mylist)
+# print mylist
 
-mylist = [1,2,3,4]
-changeme(mylist)
-print mylist
+print 2>>1
+print 2<<1
+print 20<<2
+print 20>>1
+print 30>>1
