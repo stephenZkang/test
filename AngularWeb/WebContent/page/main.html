@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页</title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+</head>
+<body data-ng-app="mainApp" data-ng-controller="mainCtrl">
+	<!-- 
+		Angular 过滤器
+			currency	格式化数字为货币
+			filter		从数组项中选择一个子集
+			lowercase	格式化字符串为小写
+			orderBy		根据某个表达式排列数组
+			uppercase	格式化字符串为大写
+			
+		Angular 服务
+			可以是一个函数或者一个对象，内嵌了30多个服务，也可以自定义服务
+			$http服务
+			$http服务
+			
+	 -->
+	<div  class="container">
+		<div style="float: left">
+			禁止项：<input type="text" data-ng-model="test" ><br/>
+			<!-- 向指令中添加过滤器 -->
+			<ul data-ng-repeat="x in names | filter:test | orderBy:'country'">
+				<!-- 表达式中添加过滤器 -->
+				<li style="color: {{x.color}};">{{x.name|uppercase}}</li>
+				<li style="color: {{x.color}};">{{(x.name|lowercase) + ', ' + x.country}}</li>
+			</ul>
+		</div>
+		<div style="float: left;margin-left: 10px;">
+			<input type="number" name="quantity" style="margin-bottom: 5px;" data-ng-model="quantity">
+			<span data-ng-show="quantity.$errorNumber">输入不合法！</span>
+			<br/>
+			<input type="number" data-ng-model="price">
+			<p style="color: blue;">总价： {{(quantity*price)|currency}}</p>
+			<select data-ng-model="selectNames" data-ng-options="x.name for x in names"></select>
+		</div>
+		<div style="float: left;margin-left: 10px;">
+			<input type="checkbox" data-ng-model="mySwitch">
+			<button class="btn" data-ng-disabled="mySwitch">点我！</button>
+			<br/>
+			<table class="table table-striped" data-ng-show="!mySwitch">
+				<tr data-ng-repeat="x in names">
+				<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.name }}</td>
+				<td data-ng-if="$even">{{ x.name }}</td>
+				<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.country }}</td>
+				<td data-ng-if="$even">{{ x.country }}</td>
+				</tr>
+			</table>
+		</div>
+		<div style="float: left;margin-left: 10px;">
+			<button data-ng-click="toggle()">隐藏/显示</button>
+	
+			<p data-ng-hide="myVar">
+				名: <input type="text" data-ng-model="firstName"><br>
+				姓名: <input type="text" data-ng-model="lastName"><br>
+			<br>
+			Full Name: {{firstName + " " + lastName}}
+			</p>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="namesController.js"></script>
+</body>
+</html>

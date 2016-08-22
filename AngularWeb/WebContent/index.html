@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AngularWeb</title>
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body style="margin-left: 50px;margin-top: 50px;">
+	<a href="page/main.html">主页</a>
+	<!-- 
+		data-ng-app	指令定义了一个angular应用
+		data-ng-controller 表示angular控制器
+		data-ng-model指令把元素值(比如输入框的值)绑定到了应用程序
+		{{}} angular表达式,显示值作用等同于	data-ng-bind
+		data-ng-repeat指令重复html元素
+		app.directive 自定义指令
+		
+	 -->
+	<div data-ng-app="myApp" data-ng-controller="myCtrl" 
+		data-ng-init="quantity=1;cost=5;firstName='John';lastName='Doe';person={firstName:'stephen',lastName:'Kang'};names=['Jani','Hege','Kai']">
+ 		<p>名字 : <input type="text" data-ng-model="name"></p>
+ 		<p>年龄 : <input type="text" data-ng-model="age"></p>
+ 		<h1>Hello {{name+age}}</h1>
+ 		<p>5+5 = {{5+5}} </p>
+ 		<p>总价: <span data-ng-bind="quantity * cost"></span></p>
+ 		<p>姓名：{{firstName + '	' + lastName}}</p>
+ 		<p>姓名：<span data-ng-bind="firstName +'	'+ lastName"></span> </p>
+ 		<h1>{{person.firstName}}</h1>
+		<ul>
+			<li data-ng-repeat="x in names">
+				{{x}}
+			</li>		
+		</ul>
+		<p data-run></p>
+		<form action="" name="myForm">
+			<input type="email" name="myAddress" data-ng-model="text">
+			<span data-ng-show="myForm.myAddress.$error.email">这不是一个合法的邮箱！</span>
+			<br/>
+			{{myForm.myAddress.$valid}}	
+			{{myForm.myAddress.$dirty}}
+    		{{myForm.myAddress.$touched}}
+		</form>
+	</div>
+	<script type="text/javascript">
+		var app = angular.module('myApp', []);
+		app.controller('myCtrl', function($scope) {
+			$scope.name = 'Join';
+			$scope.age = 25;
+			
+		});
+		app.directive('run', function(){
+			return {
+				restrict: "A",	// E 作为元素名使用 	A 作为属性使用 C 作为类名使用 M 作为注释使用
+				template:'<h1>自定义指令</h1>'
+			};
+		});
+	</script>
+
+</body>
+</html>
