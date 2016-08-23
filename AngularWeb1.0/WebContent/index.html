@@ -6,7 +6,8 @@
 <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
 </head>
 <body style="margin-left: 50px;margin-top: 50px;">
-	<a href="page/main.html">主页</a>
+	
+	
 	<!-- 
 		data-ng-app	指令定义了一个angular应用
 		data-ng-controller 表示angular控制器
@@ -18,6 +19,8 @@
 	 -->
 	<div data-ng-app="myApp" data-ng-controller="myCtrl" 
 		data-ng-init="quantity=1;cost=5;firstName='John';lastName='Doe';person={firstName:'stephen',lastName:'Kang'};names=['Jani','Hege','Kai']">
+		
+		<a href="page/main.html">主页</a>
  		<p>名字 : <input type="text" data-ng-model="name"></p>
  		<p>年龄 : <input type="text" data-ng-model="age"></p>
  		<h1>Hello {{name+age}}</h1>
