@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页</title>
+<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+</head>
+<body >
+	<div data-ng-controller="navCtrl">
+		<p>名字 : <input type="text" data-ng-model="name"></p>
+ 		<p>年龄 : <input type="text" data-ng-model="age"></p>
+ 		<h1>Hello {{name+age}}</h1>
+ 		<p>5+5 = {{5+5}} </p>
+ 		<p>总价: <span data-ng-bind="quantity * cost"></span></p>
+ 		<p>姓名：{{firstName + '	' + lastName}}</p>
+ 		<p>姓名：<span data-ng-bind="firstName +'	'+ lastName"></span> </p>
+ 		<h1>{{person.firstName}}</h1>
+		<ul>
+			<li data-ng-repeat="x in names">
+				{{x}}
+			</li>		
+		</ul>
+		<p data-run></p>
+		<form action="" name="myForm">
+			<input type="email" name="myAddress" data-ng-model="text">
+			<span data-ng-show="myForm.myAddress.$error.email">这不是一个合法的邮箱！</span>
+			<br/>
+			{{myForm.myAddress.$valid}}	
+			{{myForm.myAddress.$dirty}}
+    		{{myForm.myAddress.$touched}}
+		</form>
+	
+	</div>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+	<script type="text/javascript">
+		angular.module('myApp').controller('navCtrl', function($scope) {
+			$scope.name = 'Join';
+			$scope.age = 25;
+		});
+		
+		angular.module('myApp').directive('run', function(){
+			return {
+				restrict: "A",	// E 作为元素名使用 	A 作为属性使用 C 作为类名使用 M 作为注释使用
+				template:'<h1>自定义指令</h1>'
+			};
+		});
+	</script>
+	
+</body>
+</html>
