@@ -1,13 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>主页</title>
-<link rel="stylesheet" href="http://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
-<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
-<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>主页</title>
+	<link rel="stylesheet" href="../resources/bootstrap-3.3.5/css/bootstrap.min.css">
 </head>
-<body data-ng-controller="mainCtrl">
+<body data-ng-controller="mainCtrl"   data-ng-app="mainApp">
 	<!-- 
 		Angular 过滤器
 			currency	格式化数字为货币
@@ -23,48 +21,85 @@
 			
 	 -->
 	<div  class="container">
-		<div style="float: left">
-			禁止项：<input type="text" data-ng-model="test" ><br/>
-			<!-- 向指令中添加过滤器 -->
-			<ul data-ng-repeat="x in names | filter:test | orderBy:'country'">
-				<!-- 表达式中添加过滤器 -->
-				<li style="color: {{x.color}};">{{x.name|uppercase}}</li>
-				<li style="color: {{x.color}};">{{(x.name|lowercase) + ', ' + x.country}}</li>
-			</ul>
+		<div class="page-header">
+			<h3>Angular Filters  </h3>
+     	</div>
+		<div class="row" style="margin-left: 20px;">
+			<div class="col-sm-2">
+				禁止项：<input type="text" data-ng-model="test"><br/>
+			</div>
+			<div class="col-sm-4">
+				<!-- 向指令中添加过滤器 -->
+				<ul data-ng-repeat="x in names | filter:test | orderBy:'country'" class="list-group">
+					<!-- 表达式中添加过滤器 -->
+					<li style="color: {{x.color}};" class="list-group-item ">{{x.name|uppercase}}</li>
+					<li style="color: {{x.color}};" class="list-group-item">{{(x.name|lowercase) + ', ' + x.country}}</li>
+				</ul>
+			</div>
 		</div>
-		<div style="float: left;margin-left: 10px;">
-			<input type="number" name="quantity" style="margin-bottom: 5px;" data-ng-model="quantity">
-			<span data-ng-show="quantity.$errorNumber">输入不合法！</span>
-			<br/>
-			<input type="number" data-ng-model="price">
-			<p style="color: blue;">总价： {{(quantity*price)|currency}}</p>
+		
+      	<div class="page-header">
+			<h3>Angular 表达式  </h3>
+     	</div>
+		<div class="row" style="margin-left: 20px;">
+			<div class="col-md-2">
+				<input type="number" name="quantity" style="margin-bottom: 5px;" data-ng-model="quantity">
+				<span data-ng-show="quantity.$errorNumber">输入不合法！</span>
+				<br/>
+				<input type="number" data-ng-model="price">
+			</div>
+			<div class="col-md-4 col-sm-2">
+				<p style="color: blue;">总价： {{(quantity*price)|currency}}</p>
+			</div>
 			<select data-ng-model="selectNames" data-ng-options="x.name for x in names"></select>
 		</div>
-		<div style="float: left;margin-left: 10px;">
-			<input type="checkbox" data-ng-model="mySwitch">
-			<button class="btn" data-ng-disabled="mySwitch">点我！</button>
-			<br/>
-			<table class="table table-striped" data-ng-show="!mySwitch">
-				<tr data-ng-repeat="x in names">
-				<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.name }}</td>
-				<td data-ng-if="$even">{{ x.name }}</td>
-				<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.country }}</td>
-				<td data-ng-if="$even">{{ x.country }}</td>
-				</tr>
-			</table>
+		<div class="page-header">
+		 <h3>ng-repeat 重复元素</h3>
 		</div>
-		<div style="float: left;margin-left: 10px;">
-			<button data-ng-click="toggle()">隐藏/显示</button>
-	
-			<p data-ng-hide="myVar">
-				名: <input type="text" data-ng-model="firstName"><br>
-				姓名: <input type="text" data-ng-model="lastName"><br>
-			<br>
-			Full Name: {{firstName + " " + lastName}}
-			</p>
+		<div class="row" style="margin-left: 20px;">
+			<div class="col-sm-4 col-md-2">
+				<input type="checkbox" data-ng-model="mySwitch">
+				<button class="btn btn-success" data-ng-disabled="mySwitch">点我！</button>
+			</div>
+			<div class="col-md-6">
+				<table class="table" data-ng-show="!mySwitch">
+					<thead>
+						<tr>
+							<th>姓名</th>
+							<th>地区</th>
+						</tr>
+					</thead>
+					<tr data-ng-repeat="x in names">
+						<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.name }}</td>
+						<td data-ng-if="$even">{{ x.name }}</td>
+						<td data-ng-if="$odd" style="background-color:#f1f1f1">{{ x.country }}</td>
+						<td data-ng-if="$even">{{ x.country }}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="page-header">
+		 	<h3>ng-click</h3>
+		</div>
+		<div class="row" style="margin-left: 20px;">
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-primary" data-ng-click="toggle()">隐藏/显示</button>
+			</div>
+			<div class="col-sm-4">
+				<p data-ng-hide="myVar">
+					FirstName: <input type="text" data-ng-model="firstName"><br>
+					LastName: <input type="text" data-ng-model="lastName"><br>
+				<br>
+				Full Name: {{firstName + " " + lastName}}
+				</p>
+			</div>
+		</div>
+		<div class="page-header">
 		</div>
 	</div>
-
-	<script type="text/javascript" src="namesController.js"></script>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular-animate.min.js"></script>
+	<script type="text/javascript" src="../resources/bootstrap-3.3.5/js/jquery-2.0.3.min.js"></script>
+	<script type="text/javascript" src="../resources/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

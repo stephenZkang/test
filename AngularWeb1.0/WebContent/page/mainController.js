@@ -1,5 +1,5 @@
-angular.module('myApp')
-.controller('mainCtrl', function($scope,$http,$timeout) {
+var mainApp = angular.module('mainApp',[]);
+mainApp.controller('mainCtrl', function($scope,$http,$timeout) {
 	$scope.names=[
 	              {name:'Jani',country:'Norway',color:'red'},
 	              {name:'Hege',country:'Sweden',color:'yellow'},
