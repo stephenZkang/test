@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
+encoding//test/Child.py=utf-8
+encoding//test/Parent.py=utf-8
+encoding//test/Ptest.py=utf-8
 encoding//test/crawler.py=utf-8

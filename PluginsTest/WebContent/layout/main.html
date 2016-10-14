@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+  <title>购物商城-后台管理</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all-gray.css" />
+  <link rel="stylesheet" type="text/css" href="../kindeditor/themes/default/default.css" />
+  <link rel="stylesheet" type="text/css" href="../css/all.css" />
+  <link rel="stylesheet" type="text/css" href="../css/toolbar.css" />
+  <script type="text/javascript" src="../extjs/ext-all.js"></script>
+  <script type="text/javascript" src="../extjs/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript" src="../js/base.js"></script>
+  <script type="text/javascript" src="../js/constant.js"></script>
+  <script type="text/javascript" src="../js/MessageBox.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.11.2.js"></script>
+  <script type="text/javascript" src="../kindeditor/kindeditor-min.js"></script>
+  <script type="text/javascript" src="../kindeditor/lang/zh_CN.js"></script>
+  
+  <script type="text/javascript">
+    Ext.Loader.setConfig({  
+     enabled: true,  //开启自动加载
+     paths : {//'类名前缀':'所在路径'  
+       'Ext.ux.main': '../layout',
+       'Ext.ux.ktlTrade': '../js',
+       'Ext.ux.ktlTrade.product': '../product',
+       'Ext.ux.ktlTrade.order': '../order',
+       'Ext.ux.ktlTrade.system': '../system',
+       'Ext.ux.ktlTrade.module': '../module'
+     }  
+    }); 
+     Ext.require('Ext.ux.main.index');
+     Ext.require('Ext.ux.ktlTrade.kindbtn');
+     Ext.require('Ext.ux.ktlTrade.kindeditor');
+     Ext.require('Ext.ux.ktlTrade.product.ProductClassify');
+     Ext.require('Ext.ux.ktlTrade.product.ProductImages');
+     Ext.require('Ext.ux.ktlTrade.product.ProductStatics');
+     Ext.require('Ext.ux.ktlTrade.product.ProductType');
+     Ext.require('Ext.ux.ktlTrade.product.ProductGrid');
+     Ext.require('Ext.ux.ktlTrade.product.ProductEvaluate');
+     Ext.require('Ext.ux.ktlTrade.product.ProductManage');
+     Ext.require('Ext.ux.ktlTrade.system.Person');
+     Ext.require('Ext.ux.ktlTrade.system.Note');
+     Ext.require('Ext.ux.ktlTrade.system.AuthCodeRec');
+     Ext.require('Ext.ux.ktlTrade.system.User');
+     Ext.require('Ext.ux.ktlTrade.system.VoucherGrid');
+     Ext.require('Ext.ux.ktlTrade.system.Voucher');
+     Ext.require('Ext.ux.ktlTrade.system.SystemSetting');
+     Ext.require('Ext.ux.ktlTrade.system.SystemAbout');
+     Ext.require('Ext.ux.ktlTrade.order.Order');
+     Ext.require('Ext.ux.ktlTrade.module.Module');
+          
+      Ext.onReady(function(){
+      	Ext.MessageBox.initComponent(); //初始化messageBox按钮为中文
+        //初始表格行编辑按钮中文化
+        Ext.grid.RowEditor.prototype.saveBtnText = '保存';
+        Ext.grid.RowEditor.prototype.cancelBtnText = '取消';
+        //自定文本框验证
+        Ext.apply(Ext.form.field.VTypes, {
+            IPAddress:  function(v) {
+              return /^([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]{1,2}|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$/.test(v);
+            },
+            IPAddressText: '请输入正确的IP地址！',
+            UserName: function(v){
+              return /^[a-zA-Z][a-zA-Z0-9_]{4,29}$/.test(v);
+            },
+            UserNameText: '必须由字母开头，允许5-30位字符，允许字母数字下划线！',
+            UserPassword: function(v){
+              return /(?=^.{8,25}$)(?=(?:.*?\d){2})(?=.*[a-z])(?=(?:.*?[A-Z]){2})(?=(?:.*?[!@#$%*()_+^&}{:;?.]){1})(?!.*\s)[0-9a-zA-Z!@#$%*()_+^&]*$/.test(v);
+            },
+            UserPasswordText: '密码长度最少8位，包含至少1个特殊字符，2个数字，2个大写字母和一些小写字母!',
+            Rphone: function(v){
+              return /^((\+86)|(86))?((13)|(18)|(14)|(17)|(15))\d{9}$/.test(v);
+            },
+            RphoneText: '请输入正确的手机号码！'
+        });
+        Ext.QuickTips.init();
+        Ext.form.Field.prototype.msgTarget='side';//提示的方式，
+        Ext.Ajax.request({
+          url: '/loadSystemInfo/MenuAndSystemInfoLoad',
+          method: 'POST', 
+          failure: function(response,options) {
+            alert("failure: " + Ext.JSON.encode(response));
+          },
+          success: function(response,options) {
+            var obj = Ext.JSON.decode(response.responseText);//获取json串，并解析
+            if(obj.success == false){
+              Ext.MessageBox.alert('用户提示',obj.message);
+            }else{
+               var account = obj.userName;
+               var roleName = obj.roleName;
+               var roleId = obj.roleId;
+               var topMenus = obj.topMenus;
+               var parentMenus = obj.parentMenus;
+               var subMenus = obj.subMenus;
+               var pageSize = obj.pageSize;
+             
+              
+               Ext.create('Ext.ux.main.index',{
+                 account: account,
+                 roleName: roleName,
+                 roleId: roleId,
+                 topMenus: topMenus,
+                 parentMenus: parentMenus,
+                 subMenus: subMenus,
+                 pageSize: pageSize
+               }).render("container"); 
+            }
+            
+          } 
+        }); 
+      });
+    </script>
+  </head>
+  
+  <body>
+    <div id = "container"></div>
+  </body>
+</html>

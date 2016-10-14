@@ -23,7 +23,7 @@ def getImage(html):
         x+=1
 
         
-url = 'http://tieba.baidu.com/p/2738151262'
+url = 'http://tieba.baidu.com/p/4745979872'
 html = getHtml(url)
 print html
 print getImage(html)
